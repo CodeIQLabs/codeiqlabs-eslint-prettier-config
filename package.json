@@ -4,6 +4,7 @@
   "description": "Shared ESLint v9 flat config for CodeIQLabs projects",
   "main": "index.js",
   "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
     "access": "public"
   },
   "exports": {
