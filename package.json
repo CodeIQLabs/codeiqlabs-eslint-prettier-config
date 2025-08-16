@@ -1,0 +1,53 @@
+{
+  "name": "@codeiqlabs/eslint-config",
+  "version": "1.1.0",
+  "description": "Shared ESLint v9 flat config for CodeIQLabs projects",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./minimal": "./minimal.js",
+    "./react": "./react.js",
+    "./react-strict": "./react-strict.js"
+  },
+  "files": [
+    "*.js",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "test": "node -e \"console.log('ok')\""
+  },
+  "keywords": [
+    "eslint",
+    "config",
+    "flat-config",
+    "codeiqlabs"
+  ],
+  "author": "CodeIQLabs",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.18"
+  },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "typescript": ">=5.4 <6"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-react": {
+      "optional": true
+    },
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@eslint/js": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.3.0",
+    "typescript-eslint": "^8.39.1"
+  }
+}
