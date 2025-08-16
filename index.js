@@ -2,5 +2,5 @@
 module.exports = {
   minimal: require('./minimal'),
   react: require('./react'),
-  default: require('./minimal')
+  default: require('./minimal'),
 };

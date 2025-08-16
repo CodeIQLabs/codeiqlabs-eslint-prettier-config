@@ -12,14 +12,14 @@ module.exports = [
   ...tseslint.configs.recommended, // non type-aware (fast)
   {
     languageOptions: {
-      parser: tseslint.parser,         // <-- parser comes from meta package
+      parser: tseslint.parser, // <-- parser comes from meta package
       sourceType: 'module',
-      globals: { ...globals.node }
+      globals: { ...globals.node },
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/consistent-type-imports': 'warn'
-    }
+      '@typescript-eslint/consistent-type-imports': 'warn',
+    },
   },
-  prettier
+  prettier,
 ];
