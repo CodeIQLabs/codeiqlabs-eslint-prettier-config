@@ -1,5 +1,5 @@
-import type { Linter } from "eslint";
-import minimal from "./minimal.js";
+import type { Linter } from 'eslint';
+import minimal from './minimal.js';
 
 let react: any, reactHooks: any;
 try {

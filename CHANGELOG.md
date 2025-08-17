@@ -4,7 +4,8 @@
 
 ### Minor Changes
 
-- 8a54727: feat: centralize Prettier config and export as `@codeiqlabs/eslint-prettier-config/prettier`
+- 8a54727: feat: centralize Prettier config and export as
+  `@codeiqlabs/eslint-prettier-config/prettier`
   - Publish dual ESM/CJS via conditional exports
   - Update README with CJS/ESM usage + format scripts
   - Scope TS parsing to `*.ts,*.tsx`; switch to `import * as parser` interop
@@ -23,7 +24,8 @@
 
   ## "@codeiqlabs/eslint-config": minor
 
-  Migrate config to TypeScript (CJS output), centralize flat-config `ignores`, ship type defs, and add a smoke test. No rule behavior changes.
+  Migrate config to TypeScript (CJS output), centralize flat-config `ignores`, ship type defs, and
+  add a smoke test. No rule behavior changes.
 
 ## 1.2.0
 
