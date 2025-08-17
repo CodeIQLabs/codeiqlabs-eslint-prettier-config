@@ -5,6 +5,7 @@
 ### Making Changes
 
 1. **Create a feature branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -15,6 +16,7 @@
    - Update documentation
 
 3. **Test your changes**
+
    ```bash
    npm run build
    npm test
@@ -23,14 +25,17 @@
    ```
 
 4. **Create a changeset**
+
    ```bash
    npm run changeset
    ```
+
    - Select the appropriate change type (patch/minor/major)
    - Write a clear, descriptive summary
    - See `.changeset/RELEASE_TEMPLATE.md` for guidance
 
 5. **Commit and push**
+
    ```bash
    git add .
    git commit -m "feat: your feature description"
@@ -53,23 +58,68 @@ The release process is fully automated:
 
 ### Changeset Guidelines
 
+# Release Template
+
+When creating changesets, use this template for consistent release notes:
+
 #### When to create changesets:
+
 - **Patch**: Bug fixes, documentation updates, internal refactoring
 - **Minor**: New features, new presets, additive changes
 - **Major**: Breaking changes, removed features, changed APIs
 
-#### Writing good changesets:
-```bash
-# Good examples:
-fix: resolve TypeScript parsing issues with React JSX
-feat: add new strict React preset with additional rules
-BREAKING: remove deprecated .eslintrc support, require flat config
+## For Patch Releases (Bug Fixes)
 
-# Poor examples:
-update stuff
-fix bug
-changes
 ```
+fix: [brief description]
+
+- Fixed [specific issue]
+- Resolved [specific problem]
+- Updated [specific component] to handle [specific case]
+```
+
+## For Minor Releases (New Features)
+
+```
+feat: [brief description]
+
+- Added [new feature/preset/configuration]
+- Enhanced [existing functionality]
+- Improved [specific aspect]
+```
+
+## For Major Releases (Breaking Changes)
+
+```
+BREAKING: [brief description]
+
+- **BREAKING**: [specific breaking change]
+- **Migration**: [how to migrate]
+- Removed [deprecated feature]
+- Changed [behavior] from [old] to [new]
+```
+
+## Examples
+
+### Good Changeset Examples:
+
+- `fix: resolve TypeScript parsing issues with React JSX`
+- `feat: add new strict React preset with additional rules`
+- `BREAKING: remove deprecated .eslintrc support, require flat config`
+
+### Poor Changeset Examples:
+
+- `update stuff`
+- `fix bug`
+- `changes`
+
+## Creating a Changeset
+
+1. Run `npm run changeset`
+2. Select the type of change (patch/minor/major)
+3. Write a clear, descriptive summary
+4. Include details about what changed and why
+5. For breaking changes, include migration instructions
 
 ### Scripts Reference
 
@@ -97,15 +147,18 @@ npm run release       # Publish and push tags
 ### Troubleshooting
 
 #### "No changeset found" error in CI
+
 - You need to create a changeset for your changes
 - Run `npm run changeset` and commit the generated file
 
 #### Build failures
+
 - Ensure TypeScript compiles: `npm run build`
 - Check formatting: `npm run format:check`
 - Verify tests pass: `npm test`
 
 #### Release issues
+
 - Check GitHub Actions logs
 - Verify GitHub Packages permissions
 - Ensure all required secrets are configured

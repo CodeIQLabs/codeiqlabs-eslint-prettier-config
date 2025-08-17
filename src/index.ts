@@ -1,5 +1,5 @@
-import minimal from "./minimal.js";
-import { ignores } from "./ignores.js";
+import minimal from './minimal.js';
+import { ignores } from './ignores.js';
 
 export { minimal, ignores };
 // optional: default export = minimal to make ESM default-import “just work”
