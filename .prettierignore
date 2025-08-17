@@ -9,3 +9,4 @@ coverage
 .turbo
 .idea
 .terraform
+src/prettier.config.ts
