@@ -1,5 +1,5 @@
 import type { Linter } from "eslint";
-import parser from "@typescript-eslint/parser";
+import * as parser from "@typescript-eslint/parser";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import globals from "globals";
 import prettier from "eslint-config-prettier";
@@ -8,6 +8,7 @@ import { ignores } from "./ignores.js";
 const minimal: Linter.FlatConfig[] = [
   { ignores: [...ignores] },
   {
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       parser,
       parserOptions: { ecmaVersion: "latest", sourceType: "module" },

@@ -1,79 +1,106 @@
-# @codeiqlabs/eslint-config
+# @codeiqlabs/eslint-prettier-config
 
-Shared ESLint v9 flat config (with centralized ignores) for CodeIQLabs projects.
-Now published as dual module: ESM and CJS via conditional exports.
+Shared ESLint v9 flat config and Prettier config for CodeIQLabs projects.
+Published as dual module: ESM and CJS via conditional exports.
 
 ## Install
 
 ```bash
-# eslint + typescript-eslint peers are required in the consuming repo
-npm i -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+# Required peer dependencies
+npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier
 
 # React projects (optional peers):
 npm i -D eslint-plugin-react eslint-plugin-react-hooks
 ```
 
-Prettier is separate (we ship a centralized config; see below).
-
 ## Usage (ESLint v9 flat config)
 
-### CJS consumer (Node "commonjs" / eslint.config.cjs)
+### Centralized ESLint config (included)
 
+Create an ESLint configuration file:
+
+**For CommonJS projects:**
 ```javascript
-// eslint.config.cjs
-const { minimal } = require('@codeiqlabs/eslint-config');
-module.exports = minimal;
+// eslint.config.js
+module.exports = require('@codeiqlabs/eslint-prettier-config').minimal;
 
 // React apps (optional plugins required):
-// module.exports = require('@codeiqlabs/eslint-config/react');
+// module.exports = require('@codeiqlabs/eslint-prettier-config/react');
 ```
 
-### ESM consumer (Node "module" or eslint.config.mjs)
-
+**For ESM projects or projects that ignore *.js files:**
 ```javascript
-// eslint.config.js (ESM)
-import cfg from '@codeiqlabs/eslint-config'; // default export = minimal
-export default cfg;
+// eslint.config.mjs (recommended for projects that ignore *.js files)
+import minimal from '@codeiqlabs/eslint-prettier-config/minimal';
+export default minimal;
 
-// Or named subpath (React preset):
-// import react from '@codeiqlabs/eslint-config/react';
+// React apps:
+// import react from '@codeiqlabs/eslint-prettier-config/react';
 // export default react;
+```
+
+Add lint scripts to `package.json`:
+```json
+{
+  "scripts": {
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
+  }
+}
 ```
 
 **Tip:** Prefer `npx eslint .` instead of passing globs; our preset already ships a global ignores block for `dist`, `build`, `.next`, `coverage`, etc.
 
-## Centralized Prettier config (optional but recommended)
+### Centralized Prettier config (included)
 
-We publish a Prettier config you can reference directly—no local `.prettierrc` needed.
+Create a Prettier configuration file:
 
-In the consuming repo:
-
-```bash
-npm i -D prettier
+**For CommonJS projects:**
+```javascript
+// prettier.config.js
+module.exports = require('@codeiqlabs/eslint-prettier-config/prettier');
 ```
 
+**For ESM projects or projects that ignore *.js files:**
+```javascript
+// prettier.config.mjs
+import config from '@codeiqlabs/eslint-prettier-config/prettier';
+export default config;
+```
+
+Add format scripts to `package.json`:
 ```json
-// package.json
 {
-  "prettier": "@codeiqlabs/eslint-config/prettier",
   "scripts": {
-    "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format": "npx prettier . --write",
+    "format:check": "npx prettier . --check"
   }
 }
 ```
+
+**Note:** If using `.mjs` config files, specify the config explicitly:
+```json
+{
+  "scripts": {
+    "format": "npx prettier --config prettier.config.mjs . --write",
+    "format:check": "npx prettier --config prettier.config.mjs . --check"
+  }
+}
+```
+
+
 
 ## What's exported (dual ESM + CJS)
 
 | Subpath | ESM import | CJS require |
 |---------|------------|-------------|
-| `@codeiqlabs/eslint-config` | `import cfg from '@codeiqlabs/eslint-config'` | `const cfg = require('@codeiqlabs/eslint-config')` |
-| `@codeiqlabs/eslint-config/minimal` | `import minimal from '@.../minimal'` | `const minimal = require('@.../minimal')` |
-| `@codeiqlabs/eslint-config/react` | `import react from '@.../react'` | `const react = require('@.../react')` |
-| `@codeiqlabs/eslint-config/prettier` | `import p from '@.../prettier'` | `const p = require('@.../prettier')` |
-| `@codeiqlabs/eslint-config/ignores` | `import {…} from '@.../ignores'` | `const {…} = require('@.../ignores')` |
+| `@codeiqlabs/eslint-prettier-config` | `import cfg from '@codeiqlabs/eslint-prettier-config'` | `const cfg = require('@codeiqlabs/eslint-prettier-config')` |
+| `@codeiqlabs/eslint-prettier-config/minimal` | `import minimal from '@.../minimal'` | `const minimal = require('@.../minimal')` |
+| `@codeiqlabs/eslint-prettier-config/react` | `import react from '@.../react'` | `const react = require('@.../react')` |
+| `@codeiqlabs/eslint-prettier-config/prettier` | `import p from '@.../prettier'` | `const p = require('@.../prettier')` |
+| `@codeiqlabs/eslint-prettier-config/ignores` | `import {…} from '@.../ignores'` | `const {…} = require('@.../ignores')` |
 
-Default export of root (`@codeiqlabs/eslint-config`) is `minimal` for smooth ESM default-imports.
+Default export of root (`@codeiqlabs/eslint-prettier-config`) is `minimal` for smooth ESM default-imports.
 
 React preset is a subpath (`./react`) so the optional React plugins are not forced on non-React repos.
 

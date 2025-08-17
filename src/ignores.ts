@@ -5,7 +5,7 @@ export const ignores = [
   "**/coverage/**",
   "**/.turbo/**",
   "**/.cache/**",
-  "**/tmp/**"
+  "**/tmp/**",
 ] as const;
 
 export type IgnoreGlobs = typeof ignores[number];
