@@ -1,5 +1,14 @@
 # @codeiqlabs/eslint-config
 
+## 1.4.1
+
+### Patch Changes
+
+- c152e4c: feat: publish shareable pre-commit hooks for Prettier & Eslint. No rule or runtime
+  behavior changes.
+- 0d4b410: chore(ci/release): enforce Prettier + build in PRs and publish on main via Changesets. No
+  rule or runtime behavior changes.
+
 ## 1.4.0
 
 ### Minor Changes
