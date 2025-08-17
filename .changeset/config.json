@@ -6,6 +6,8 @@
   "linked": [],
   "access": "public",
   "baseBranch": "main",
+  "tag": "latest",
+  "tagFormat": "v${version}",
   "updateInternalDependencies": "patch",
   "ignore": []
 }

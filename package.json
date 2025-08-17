@@ -36,6 +36,8 @@
   ],
   "sideEffects": false,
   "publishConfig": {
+    "access": "public",
+    "tag": "latest",
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
@@ -50,7 +52,8 @@
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:cjs:pkg",
     "build:cjs:show": "tsc -p tsconfig.cjs.json --showConfig",
     "test:load": "node tests/load-config.test.cjs",
-    "prepublishOnly": "npm run build && npm run test:load"
+    "prepublishOnly": "npm run build && npm run test:load",
+    "release": "changeset publish && git push --follow-tags"
   },
   "keywords": [
     "eslint",
