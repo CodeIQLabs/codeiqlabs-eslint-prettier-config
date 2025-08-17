@@ -1,7 +1,7 @@
 {
-  "name": "@codeiqlabs/eslint-config",
+  "name": "@codeiqlabs/eslint-prettier-config",
   "version": "1.2.0",
-  "description": "Shared ESLint v9 flat config for CodeIQLabs projects",
+  "description": "Shared ESLint v9 flat config and Prettier config for CodeIQLabs projects",
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -22,7 +22,7 @@
       "import": "./dist/esm/react.js",
       "require": "./dist/cjs/react.js"
     },
-    "./prettier": "./prettier.config.js",
+    "./prettier": "./dist/cjs/prettier.config.js",
     "./ignores": {
       "types": "./dist/ignores.d.ts",
       "import": "./dist/esm/ignores.js",
@@ -32,7 +32,6 @@
   "files": [
     "dist/",
     "README.md",
-    "prettier.config.js",
     ".prettierignore"
   ],
   "sideEffects": false,
@@ -55,6 +54,7 @@
   },
   "keywords": [
     "eslint",
+    "prettier",
     "config",
     "flat-config",
     "codeiqlabs"
@@ -66,12 +66,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/CodeIQLabs/codeiqlabs-eslint-config"
+    "url": "https://github.com/CodeIQLabs/codeiqlabs-eslint-prettier-config"
   },
   "bugs": {
-    "url": "https://github.com/CodeIQLabs/codeiqlabs-eslint-config/issues"
+    "url": "https://github.com/CodeIQLabs/codeiqlabs-eslint-prettier-config/issues"
   },
-  "homepage": "https://github.com/CodeIQLabs/codeiqlabs-eslint-config#readme",
+  "homepage": "https://github.com/CodeIQLabs/codeiqlabs-eslint-prettier-config#readme",
   "peerDependencies": {
     "eslint": "^9.0.0",
     "@typescript-eslint/parser": "^8.0.0",
@@ -89,12 +89,12 @@
   },
   "dependencies": {
     "eslint-config-prettier": "^9.1.0",
-    "globals": "^15.0.0"
+    "globals": "^15.0.0",
+    "prettier": "^3.3.3"
   },
   "devDependencies": {
     "@changesets/cli": "^2.29.6",
     "@types/eslint": "^9.6.0",
-    "prettier": "^3.3.3",
     "typescript": "^5.4.0",
     "rimraf": "^5.0.0"
   }
