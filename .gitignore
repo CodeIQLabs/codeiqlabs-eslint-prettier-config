@@ -1,5 +1,4 @@
 !jest.config.js
-*.d.ts
 node_modules
 
 # CDK asset staging directory
@@ -66,3 +65,4 @@ cdk.out/
 cdk.context.json
 template.yaml
 *.tsbuildinfo
+dist/
