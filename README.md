@@ -115,13 +115,13 @@ When you see a new version of this package, you can be confident that:
 
 ### Quick Start
 
-**For CDK/Infrastructure projects:**
+**For CDK/Infrastructure/Utilities projects:**
 
 ```bash
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript prettier
 ```
 
-**For API projects:**
+**For API/Backend Projects:**
 
 ```bash
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript prettier
@@ -183,12 +183,12 @@ your-codeiqlabs-project/
 
 **Optional for React projects**:
 
-- `eslint-plugin-react` ^7.34.0 - React-specific linting rules
-- `eslint-plugin-react-hooks` ^4.6.0 - React Hooks linting rules
+- `eslint-plugin-react` ^7.37.0 - React-specific linting rules
+- `eslint-plugin-react-hooks` ^5.0.0 - React Hooks linting rules
 
 ## Usage by Project Type
 
-### CDK/Infrastructure Projects
+### Minimal (CDK, Infrastructure, Utilities)
 
 **ESLint configuration (`eslint.config.mjs`):**
 
@@ -197,6 +197,38 @@ import minimal from '@codeiqlabs/eslint-prettier-config/minimal';
 export default minimal;
 ```
 
+**Use for**: CDK projects, infrastructure utilities, simple TypeScript libraries **Includes**: Base
+JavaScript/TypeScript rules, Prettier integration **Dependencies**: No React dependencies
+
+### Standard (API, Backend Projects)
+
+**ESLint configuration (`eslint.config.mjs`):**
+
+```javascript
+import standard from '@codeiqlabs/eslint-prettier-config/standard';
+export default standard;
+```
+
+**Use for**: API servers, backend services, comprehensive TypeScript projects **Includes**: All
+minimal rules plus testing utilities and enhanced linting **Dependencies**: No React dependencies
+
+### React (UI Projects)
+
+**ESLint configuration (`eslint.config.mjs`):**
+
+```javascript
+import react from '@codeiqlabs/eslint-prettier-config/react';
+export default react;
+```
+
+**Use for**: React applications, UI components, frontend projects **Includes**: All minimal rules
+plus React-specific linting **Dependencies**: Requires `eslint-plugin-react` and
+`eslint-plugin-react-hooks`
+
+## Common Configuration
+
+### Prettier Configuration (All Project Types)
+
 **Prettier configuration (`prettier.config.mjs`):**
 
 ```javascript
@@ -204,7 +236,7 @@ import config from '@codeiqlabs/eslint-prettier-config/prettier';
 export default config;
 ```
 
-**Package.json scripts:**
+### Package.json Scripts (All Project Types)
 
 ```json
 {
@@ -215,44 +247,6 @@ export default config;
     "format:check": "npx prettier . --check"
   }
 }
-```
-
-### API Projects
-
-**ESLint configuration (`eslint.config.mjs`):**
-
-```javascript
-import config from '@codeiqlabs/eslint-prettier-config';
-export default config;
-```
-
-**Prettier configuration (`prettier.config.mjs`):**
-
-```javascript
-import config from '@codeiqlabs/eslint-prettier-config/prettier';
-export default config;
-```
-
-### React/UI Projects
-
-**ESLint configuration (`eslint.config.mjs`):**
-
-```javascript
-import react from '@codeiqlabs/eslint-prettier-config/react';
-export default react;
-```
-
-**Prettier configuration (`prettier.config.mjs`):**
-
-```javascript
-import config from '@codeiqlabs/eslint-prettier-config/prettier';
-export default config;
-```
-
-**Additional dependencies for React projects:**
-
-```bash
-npm i -D eslint-plugin-react eslint-plugin-react-hooks
 ```
 
 ### Legacy CommonJS Support
