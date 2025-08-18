@@ -1,30 +1,19 @@
 import type { Linter } from 'eslint';
-import * as parser from '@typescript-eslint/parser';
-import tsPlugin from '@typescript-eslint/eslint-plugin';
-import globals from 'globals';
-import prettier from 'eslint-config-prettier';
+import { baseConfig } from './configs/base.js';
+import { typescriptConfig } from './configs/typescript.js';
+import { prettierConfig } from './configs/prettier.js';
 import { ignores } from './ignores.js';
 
+/**
+ * Minimal ESLint configuration for CodeIQLabs projects
+ * Includes base JavaScript/TypeScript rules and Prettier integration
+ * No React dependencies - suitable for CDK, API, and utility projects
+ */
 const minimal: Linter.FlatConfig[] = [
   { ignores: [...ignores] },
-  {
-    files: ['**/*.ts', '**/*.tsx'],
-    languageOptions: {
-      parser,
-      parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-      globals: { ...globals.node, ...globals.es2024, ...globals.browser },
-    },
-    plugins: {
-      '@typescript-eslint': tsPlugin as unknown as Linter.Plugin,
-    },
-    rules: {
-      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-explicit-any': 'warn',
-      'prefer-const': 'error',
-      'no-var': 'error',
-    },
-  },
-  prettier as unknown as Linter.FlatConfig,
+  baseConfig,
+  typescriptConfig,
+  prettierConfig,
 ];
 
 export default minimal;

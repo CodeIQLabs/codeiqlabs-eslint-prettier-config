@@ -13,7 +13,9 @@ let hasReact = false;
 try {
   require.resolve('eslint-plugin-react');
   hasReact = true;
-} catch {}
+} catch {
+  // React plugin not available, skip React tests
+}
 if (hasReact) {
   const reactCfg = require(path.join(__dirname, '..', 'dist', 'cjs', 'react.js'));
   assert.ok(Array.isArray(reactCfg) && reactCfg.length > 0, 'react FlatConfig[]');
