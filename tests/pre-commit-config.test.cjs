@@ -33,16 +33,16 @@ if (typeof preCommitScripts !== 'object' || preCommitScripts === null) {
 }
 
 // Test that configurations have expected properties
-if (!lintStagedConfig['*.{ts,tsx,js,jsx,mjs,cjs}']) {
-  throw new Error('lintStagedConfig should have TypeScript/JavaScript file patterns');
+if (!lintStagedConfig['*.{ts,tsx,mjs,cjs}']) {
+  throw new Error('lintStagedConfig should have TypeScript/CommonJS/ESM file patterns');
 }
 
-if (!lintStagedMinimalConfig['*.{ts,js,mjs,cjs}']) {
-  throw new Error('lintStagedMinimalConfig should have TypeScript/JavaScript file patterns');
+if (!lintStagedMinimalConfig['*.{ts,mjs,cjs}']) {
+  throw new Error('lintStagedMinimalConfig should have TypeScript/CommonJS/ESM file patterns');
 }
 
-if (!lintStagedReactConfig['*.{ts,tsx,js,jsx,mjs,cjs}']) {
-  throw new Error('lintStagedReactConfig should have TypeScript/JavaScript file patterns');
+if (!lintStagedReactConfig['*.{ts,tsx,mjs,cjs}']) {
+  throw new Error('lintStagedReactConfig should have TypeScript/CommonJS/ESM file patterns');
 }
 
 // Test that husky script contains expected content

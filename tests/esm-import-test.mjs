@@ -21,15 +21,15 @@ if (typeof lintStagedReactConfig !== 'object' || lintStagedReactConfig === null)
 }
 
 // Test that configurations have expected properties
-if (!lintStagedConfig['*.{ts,tsx,js,jsx,mjs,cjs}']) {
+if (!lintStagedConfig['*.{ts,tsx,mjs,cjs}']) {
   throw new Error('lintStagedConfig should have TypeScript/JavaScript file patterns');
 }
 
-if (!lintStagedMinimalConfig['*.{ts,js,mjs,cjs}']) {
+if (!lintStagedMinimalConfig['*.{ts,mjs,cjs}']) {
   throw new Error('lintStagedMinimalConfig should have TypeScript/JavaScript file patterns');
 }
 
-if (!lintStagedReactConfig['*.{ts,tsx,js,jsx,mjs,cjs}']) {
+if (!lintStagedReactConfig['*.{ts,tsx,mjs,cjs}']) {
   throw new Error('lintStagedReactConfig should have TypeScript/JavaScript file patterns');
 }
 
