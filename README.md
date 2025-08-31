@@ -388,6 +388,21 @@ Install the optional peers in the consumer:
 npm i -D eslint-plugin-react eslint-plugin-react-hooks
 ```
 
+## Dependency Management
+
+This package follows modern npm ecosystem best practices for dependency management:
+
+### Package Lock Files
+
+We commit `package-lock.json` to ensure consistent dependency resolution across all environments and contributors. This practice:
+
+- **Ensures reproducible builds** - All developers and CI/CD systems use identical dependency versions
+- **Prevents dependency drift** - Eliminates "works on my machine" issues caused by version mismatches
+- **Improves security** - Locks specific versions that have been tested and verified
+- **Follows modern standards** - Current npm ecosystem best practice for both applications and libraries
+
+The outdated advice to exclude lockfiles for libraries has been superseded by the understanding that consistent dependency resolution benefits all project types.
+
 ## Versioning & Releases
 
 We use Changesets with SemVer:
