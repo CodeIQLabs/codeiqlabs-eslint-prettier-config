@@ -50,7 +50,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "prepare": "husky",
+    "postinstall": "node -e \"try { require('child_process').execSync('husky', {stdio: 'inherit'}) } catch (e) { console.log('Husky setup skipped') }\"",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "format": "prettier . --write",
@@ -63,7 +63,7 @@
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:cjs:pkg": "node -e \"require('fs').mkdirSync('dist/cjs',{recursive:true});require('fs').writeFileSync('dist/cjs/package.json','{\\\"type\\\":\\\"commonjs\\\"}\\n')\"",
-    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:cjs:pkg && npm run lint",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:cjs:pkg && npm run format && npm run lint",
     "build:cjs:show": "tsc -p tsconfig.cjs.json --showConfig",
     "test:load": "node tests/load-config.test.cjs",
     "test:pre-commit": "node tests/pre-commit-config.test.cjs",

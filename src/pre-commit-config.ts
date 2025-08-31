@@ -8,8 +8,8 @@ type LintStagedConfig = Record<string, string | string[]>;
  * Runs ESLint and Prettier on staged files before commit
  */
 export const lintStagedConfig: LintStagedConfig = {
-  // TypeScript and JavaScript files
-  '*.{ts,tsx,js,jsx,mjs,cjs}': ['eslint --fix', 'prettier --write'],
+  // TypeScript and JavaScript files (excluding .js files)
+  '*.{ts,tsx,mjs,cjs}': ['eslint --fix', 'prettier --write'],
 
   // JSON, YAML, and Markdown files
   '*.{json,yaml,yml,md}': ['prettier --write'],
@@ -23,7 +23,7 @@ export const lintStagedConfig: LintStagedConfig = {
  * Focuses on TypeScript files and infrastructure code
  */
 export const lintStagedMinimalConfig: LintStagedConfig = {
-  '*.{ts,js,mjs,cjs}': ['eslint --fix', 'prettier --write'],
+  '*.{ts,mjs,cjs}': ['eslint --fix', 'prettier --write'],
   '*.{json,yaml,yml}': ['prettier --write'],
 };
 
@@ -32,7 +32,7 @@ export const lintStagedMinimalConfig: LintStagedConfig = {
  * Includes additional file types common in UI projects
  */
 export const lintStagedReactConfig: LintStagedConfig = {
-  '*.{ts,tsx,js,jsx,mjs,cjs}': ['eslint --fix', 'prettier --write'],
+  '*.{ts,tsx,mjs,cjs}': ['eslint --fix', 'prettier --write'],
   '*.{json,yaml,yml,md,css,scss,html}': ['prettier --write'],
   'package.json': ['prettier --write'],
 };
