@@ -7,7 +7,7 @@ import globals from 'globals';
  * Provides fundamental JavaScript/ES2024 rules and globals
  */
 export const baseConfig: Linter.FlatConfig = {
-  files: ['**/*.js', '**/*.mjs', '**/*.cjs', '**/*.ts', '**/*.tsx'],
+  files: ['**/*.mjs', '**/*.cjs', '**/*.ts', '**/*.tsx'],
   languageOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',

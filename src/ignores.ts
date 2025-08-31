@@ -7,6 +7,7 @@ export const ignores = [
   '**/.turbo/**',
   '**/.cache/**',
   '**/tmp/**',
+  '**/*.js', // Ignore compiled JavaScript files (CDK generates these)
 ] as const;
 
 export type IgnoreGlobs = (typeof ignores)[number];
