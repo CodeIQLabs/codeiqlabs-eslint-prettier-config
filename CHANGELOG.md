@@ -1,5 +1,18 @@
 # @codeiqlabs/eslint-config
 
+## 1.8.1
+
+### Patch Changes
+
+- ecc43c6: Comprehensive documentation improvements and CI workflow cleanup.
+  - Remove decorative emojis for professional consistency
+  - Add JSON Schema integration section with IDE setup instructions
+  - Document manual setup requirements (npm run prepare, .mjs files)
+  - Add troubleshooting section and manual setup checklist
+  - Simplify CI workflow and remove unnecessary steps
+  - Remove .npmrc (not needed for this package)
+  - Add professional ecosystem footer
+
 ## 1.9.0
 
 ### Patch Changes
@@ -15,7 +28,8 @@
   - Simplify CI workflow by removing unnecessary steps
   - Add professional footer matching CodeIQLabs ecosystem standards
 
-  This release focuses on improving developer experience and documentation clarity without any functional code changes.
+  This release focuses on improving developer experience and documentation clarity without any
+  functional code changes.
 
 ## 1.8.0
 
