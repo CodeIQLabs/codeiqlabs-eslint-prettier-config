@@ -18,11 +18,11 @@ dual module (ESM and CJS) with conditional exports for maximum compatibility.
 ## Key Benefits
 
 **Consistency Across Projects** - All CodeIQLabs repositories use identical code quality standards
-**Zero Configuration** - Import and use immediately with sensible defaults
-**Automated Quality Enforcement** - Pre-commit hooks prevent bad code from being committed
-**Battle-Tested** - This package uses its own configurations (dogfooding) to ensure reliability
-**Easy Updates** - Update linting rules across all projects by updating one package
-**Developer Experience** - Reduces setup time and eliminates configuration drift
+**Zero Configuration** - Import and use immediately with sensible defaults **Automated Quality
+Enforcement** - Pre-commit hooks prevent bad code from being committed **Battle-Tested** - This
+package uses its own configurations (dogfooding) to ensure reliability **Easy Updates** - Update
+linting rules across all projects by updating one package **Developer Experience** - Reduces setup
+time and eliminates configuration drift
 
 ## Dogfooding & Quality Assurance via Self-Validation
 
@@ -96,11 +96,12 @@ npm run format:check # All files follow Prettier formatting
 
 By using its own configurations, this package ensures:
 
-**Real-World Testing** - Every feature is tested on actual TypeScript/JavaScript code, not just examples
-**Continuous Validation** - All commits automatically run through the same quality checks that consuming projects use
-**Breaking Change Prevention** - Configuration changes that would break existing projects are caught immediately
-**Publication Confidence** - Only configurations that successfully lint and format this codebase are published
-**Feedback Loop** - Issues with configurations are discovered and fixed during development of the package itself
+**Real-World Testing** - Every feature is tested on actual TypeScript/JavaScript code, not just
+examples **Continuous Validation** - All commits automatically run through the same quality checks
+that consuming projects use **Breaking Change Prevention** - Configuration changes that would break
+existing projects are caught immediately **Publication Confidence** - Only configurations that
+successfully lint and format this codebase are published **Feedback Loop** - Issues with
+configurations are discovered and fixed during development of the package itself
 
 When you see a new version of this package, you can be confident that:
 
@@ -133,24 +134,29 @@ npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @ty
 
 ### Pre-commit Hooks Setup (ESSENTIAL FOR CODE QUALITY)
 
-**IMPORTANT**: Pre-commit hooks are essential for this library's value proposition. Follow these steps carefully:
+**IMPORTANT**: Pre-commit hooks are essential for this library's value proposition. Follow these
+steps carefully:
 
 **1. Install Husky and lint-staged:**
+
 ```bash
 npm install --save-dev husky lint-staged
 ```
 
 **2. Add prepare script to package.json (REQUIRED):**
+
 ```bash
 npm pkg set scripts.prepare="husky"
 ```
 
 **3. Initialize Husky (REQUIRED MANUAL STEP):**
+
 ```bash
 npm run prepare
 ```
 
 **4. Create pre-commit hook manually:**
+
 ```bash
 echo "npx lint-staged" > .husky/pre-commit
 chmod +x .husky/pre-commit
@@ -163,6 +169,7 @@ chmod +x .husky/pre-commit
 You must create these configuration files in your project root:
 
 **1. ESLint Configuration (`eslint.config.mjs`):**
+
 ```javascript
 import { eslintConfigMinimal } from '@codeiqlabs/eslint-prettier-config';
 
@@ -170,6 +177,7 @@ export default eslintConfigMinimal;
 ```
 
 **2. Prettier Configuration (`prettier.config.mjs`):**
+
 ```javascript
 import { prettierConfig } from '@codeiqlabs/eslint-prettier-config';
 
@@ -177,6 +185,7 @@ export default prettierConfig;
 ```
 
 **3. lint-staged Configuration (`lint-staged.config.mjs`):**
+
 ```javascript
 import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
 
@@ -184,6 +193,7 @@ export default lintStagedMinimalConfig;
 ```
 
 **4. Package.json Scripts (add to your existing scripts):**
+
 ```json
 {
   "scripts": {
@@ -314,8 +324,8 @@ block for `dist`, `build`, `.next`, `coverage`, etc.
 
 ## Pre-commit Hooks Configuration
 
-After completing the pre-commit hooks setup from the Installation section, configure
-lint-staged for your project type:
+After completing the pre-commit hooks setup from the Installation section, configure lint-staged for
+your project type:
 
 ### Configuration by Project Type
 
@@ -382,26 +392,31 @@ pulling from GH Packages must configure their `.npmrc` accordingly.
 ### Common Setup Issues
 
 **1. Pre-commit hooks not running:**
+
 - Ensure you've run `npm run prepare` to initialize Husky
 - Verify `.husky/pre-commit` file exists and is executable
 - Check that `lint-staged.config.mjs` file exists in project root
 
 **2. ESLint configuration not found:**
+
 - Verify `eslint.config.mjs` file exists in project root
 - Check that the import statement matches the exact export name
 - Ensure the configuration file uses `.mjs` extension
 
 **3. Prettier not formatting files:**
+
 - Verify `prettier.config.mjs` file exists in project root
 - Check that your editor is configured to use the project's Prettier config
 - Run `npx prettier --check .` to verify configuration is working
 
 **4. lint-staged reports "No staged files match any configured task":**
+
 - Verify `lint-staged.config.mjs` file exists and exports the correct configuration
 - Check that you're staging files that match the configured patterns
 - Ensure the configuration import path is correct
 
 **5. Package not found errors:**
+
 - Verify you've installed all required dependencies
 - For React projects, ensure you've installed the additional React ESLint plugins
 - Check that your package.json includes the `prepare` script

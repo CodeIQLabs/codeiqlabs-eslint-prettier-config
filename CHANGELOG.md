@@ -1,5 +1,22 @@
 # @codeiqlabs/eslint-config
 
+## 1.9.0
+
+### Patch Changes
+
+- Comprehensive documentation improvements and CI workflow cleanup
+  - Remove all decorative emojis for professional presentation
+  - Add comprehensive JSON Schema integration section with IDE setup instructions
+  - Document manual setup requirements clearly (npm run prepare, .mjs files)
+  - Add troubleshooting section for common setup issues
+  - Update installation instructions with required manual steps
+  - Add manual setup checklist for verification
+  - Remove .npmrc files (not needed for this package)
+  - Simplify CI workflow by removing unnecessary steps
+  - Add professional footer matching CodeIQLabs ecosystem standards
+
+  This release focuses on improving developer experience and documentation clarity without any functional code changes.
+
 ## 1.8.0
 
 ### Minor Changes
