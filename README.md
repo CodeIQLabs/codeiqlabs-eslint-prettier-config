@@ -17,12 +17,12 @@ dual module (ESM and CJS) with conditional exports for maximum compatibility.
 
 ## Key Benefits
 
-✅ **Consistency Across Projects** - All CodeIQLabs repositories use identical code quality
-standards<br> ✅ **Zero Configuration** - Import and use immediately with sensible defaults<br> ✅
-**Automated Quality Enforcement** - Pre-commit hooks prevent bad code from being committed<br> ✅
-**Battle-Tested** - This package uses its own configurations (dogfooding) to ensure reliability<br>
-✅ **Easy Updates** - Update linting rules across all projects by updating one package<br> ✅
-**Developer Experience** - Reduces setup time and eliminates configuration drift<br>
+**Consistency Across Projects** - All CodeIQLabs repositories use identical code quality standards
+**Zero Configuration** - Import and use immediately with sensible defaults **Automated Quality
+Enforcement** - Pre-commit hooks prevent bad code from being committed **Battle-Tested** - This
+package uses its own configurations (dogfooding) to ensure reliability **Easy Updates** - Update
+linting rules across all projects by updating one package **Developer Experience** - Reduces setup
+time and eliminates configuration drift
 
 ## Dogfooding & Quality Assurance via Self-Validation
 
@@ -88,21 +88,20 @@ export default lintStagedMinimalConfig;
 The entire codebase passes both linting and formatting checks:
 
 ```bash
-npm run lint        # ✅ All files pass ESLint rules
-npm run format:check # ✅ All files follow Prettier formatting
+npm run lint        # All files pass ESLint rules
+npm run format:check # All files follow Prettier formatting
 ```
 
 ### How Dogfooding Validates Quality
 
 By using its own configurations, this package ensures:
 
-🔍 **Real-World Testing** - Every feature is tested on actual TypeScript/JavaScript code, not just
-examples<br> 🚀 **Continuous Validation** - All commits automatically run through the same quality
-checks that consuming projects use<br> 🛡️ **Breaking Change Prevention** - Configuration changes
-that would break existing projects are caught immediately<br> 📦 **Publication Confidence** - Only
-configurations that successfully lint and format this codebase are published<br> 🔄 **Feedback
-Loop** - Issues with configurations are discovered and fixed during development of the package
-itself
+**Real-World Testing** - Every feature is tested on actual TypeScript/JavaScript code, not just
+examples **Continuous Validation** - All commits automatically run through the same quality checks
+that consuming projects use **Breaking Change Prevention** - Configuration changes that would break
+existing projects are caught immediately **Publication Confidence** - Only configurations that
+successfully lint and format this codebase are published **Feedback Loop** - Issues with
+configurations are discovered and fixed during development of the package itself
 
 When you see a new version of this package, you can be confident that:
 
@@ -133,19 +132,78 @@ npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @ty
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript prettier eslint-plugin-react eslint-plugin-react-hooks
 ```
 
-### Optional: Pre-commit Hooks Setup
+### Pre-commit Hooks Setup (ESSENTIAL FOR CODE QUALITY)
 
-To automatically run ESLint and Prettier before commits:
+**IMPORTANT**: Pre-commit hooks are essential for this library's value proposition. Follow these
+steps carefully:
+
+**1. Install Husky and lint-staged:**
 
 ```bash
-# Add prepare script to package.json
-npm pkg set scripts.prepare="husky install"
+npm install --save-dev husky lint-staged
+```
 
-# Initialize husky
+**2. Add prepare script to package.json (REQUIRED):**
+
+```bash
+npm pkg set scripts.prepare="husky"
+```
+
+**3. Initialize Husky (REQUIRED MANUAL STEP):**
+
+```bash
 npm run prepare
+```
 
-# Add pre-commit hook
-npx husky add .husky/pre-commit "npx lint-staged"
+**4. Create pre-commit hook manually:**
+
+```bash
+echo "npx lint-staged" > .husky/pre-commit
+chmod +x .husky/pre-commit
+```
+
+**Note**: The `npx husky add` command is deprecated. Use the manual approach above.
+
+### Required Manual Configuration Files
+
+You must create these configuration files in your project root:
+
+**1. ESLint Configuration (`eslint.config.mjs`):**
+
+```javascript
+import { eslintConfigMinimal } from '@codeiqlabs/eslint-prettier-config';
+
+export default eslintConfigMinimal;
+```
+
+**2. Prettier Configuration (`prettier.config.mjs`):**
+
+```javascript
+import { prettierConfig } from '@codeiqlabs/eslint-prettier-config';
+
+export default prettierConfig;
+```
+
+**3. lint-staged Configuration (`lint-staged.config.mjs`):**
+
+```javascript
+import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
+
+export default lintStagedMinimalConfig;
+```
+
+**4. Package.json Scripts (add to your existing scripts):**
+
+```json
+{
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "format": "npx prettier --write .",
+    "format:check": "npx prettier --check ."
+  }
+}
 ```
 
 ### Project Structure After Setup
@@ -154,12 +212,12 @@ After installation and configuration, your project should have this structure:
 
 ```
 your-codeiqlabs-project/
-├── package.json                 # Scripts and dependencies
-├── eslint.config.mjs            # ESLint configuration
-├── prettier.config.mjs          # Prettier configuration
-├── lint-staged.config.mjs       # Pre-commit hooks (optional)
-├── .husky/                      # Git hooks (optional)
-│   └── pre-commit
+├── package.json                 # Scripts and dependencies (with prepare script)
+├── eslint.config.mjs            # ESLint configuration (REQUIRED)
+├── prettier.config.mjs          # Prettier configuration (REQUIRED)
+├── lint-staged.config.mjs       # Pre-commit hooks configuration (REQUIRED)
+├── .husky/                      # Git hooks directory (created by npm run prepare)
+│   └── pre-commit               # Pre-commit hook (created manually)
 ├── src/                         # Your source code
 │   └── index.ts
 └── dist/                        # Build output (ignored by linting)
@@ -266,8 +324,8 @@ block for `dist`, `build`, `.next`, `coverage`, etc.
 
 ## Pre-commit Hooks Configuration
 
-After completing the optional pre-commit hooks setup from the Installation section, configure
-lint-staged for your project type:
+After completing the pre-commit hooks setup from the Installation section, configure lint-staged for
+your project type:
 
 ### Configuration by Project Type
 
@@ -318,91 +376,6 @@ default-imports.
 React preset is a subpath (`./react`) so the optional React plugins are not forced on non-React
 repos.
 
-## Validate (for this package)
-
-From this repo:
-
-```bash
-# Build both module formats and mark dist/cjs as commonjs
-npm run build
-
-# Smoke test: loads CJS output and (optionally) the React preset
-npm run test:load
-
-# Quick manual checks (optional)
-node -p "require('./dist/cjs/index.js') && 'CJS OK'"
-node -e "import('./dist/esm/index.js').then(()=>console.log('ESM OK'))"
-```
-
-You should see ✅ ESLint config smoke test passed and the two "OK" messages.
-
-## Validate (in a consuming repo)
-
-Resolve the final config for a sample file:
-
-```bash
-npx eslint --print-config src/index.ts > .tmp.eslint.json
-```
-
-Make sure you see:
-
-- a first object with `ignores: ["**/dist/**", "..."]`
-- a second object with `languageOptions.parser: "@typescript-eslint/parser"` and your rules
-
-Run lint:
-
-```bash
-npx eslint .
-```
-
-If you see "all files ignored," you likely exported the package object instead of a preset array.
-Use one of the Usage examples above (don't export the whole object).
-
-## Troubleshooting
-
-### "Named export not found" (ESM)
-
-Use the default import from the root:
-
-```javascript
-import cfg from '@codeiqlabs/eslint-config';
-export default cfg;
-```
-
-or import the subpath:
-
-```javascript
-import minimal from '@codeiqlabs/eslint-config/minimal';
-```
-
-### "Cannot use import statement outside a module" (CJS)
-
-Ensure you're requiring from the CJS export (which our exports field maps automatically). If you're
-requiring built files directly, use `dist/cjs/*.js`, not `dist/esm/*.js`.
-
-### React preset fails to load
-
-Install the optional peers in the consumer:
-
-```bash
-npm i -D eslint-plugin-react eslint-plugin-react-hooks
-```
-
-## Dependency Management
-
-This package follows modern npm ecosystem best practices for dependency management:
-
-### Package Lock Files
-
-We commit `package-lock.json` to ensure consistent dependency resolution across all environments and contributors. This practice:
-
-- **Ensures reproducible builds** - All developers and CI/CD systems use identical dependency versions
-- **Prevents dependency drift** - Eliminates "works on my machine" issues caused by version mismatches
-- **Improves security** - Locks specific versions that have been tested and verified
-- **Follows modern standards** - Current npm ecosystem best practice for both applications and libraries
-
-The outdated advice to exclude lockfiles for libraries has been superseded by the understanding that consistent dependency resolution benefits all project types.
-
 ## Versioning & Releases
 
 We use Changesets with SemVer:
@@ -414,6 +387,57 @@ We use Changesets with SemVer:
 Publishing targets GitHub Packages (`publishConfig.registry=https://npm.pkg.github.com`). Consumers
 pulling from GH Packages must configure their `.npmrc` accordingly.
 
+## Troubleshooting
+
+### Common Setup Issues
+
+**1. Pre-commit hooks not running:**
+
+- Ensure you've run `npm run prepare` to initialize Husky
+- Verify `.husky/pre-commit` file exists and is executable
+- Check that `lint-staged.config.mjs` file exists in project root
+
+**2. ESLint configuration not found:**
+
+- Verify `eslint.config.mjs` file exists in project root
+- Check that the import statement matches the exact export name
+- Ensure the configuration file uses `.mjs` extension
+
+**3. Prettier not formatting files:**
+
+- Verify `prettier.config.mjs` file exists in project root
+- Check that your editor is configured to use the project's Prettier config
+- Run `npx prettier --check .` to verify configuration is working
+
+**4. lint-staged reports "No staged files match any configured task":**
+
+- Verify `lint-staged.config.mjs` file exists and exports the correct configuration
+- Check that you're staging files that match the configured patterns
+- Ensure the configuration import path is correct
+
+**5. Package not found errors:**
+
+- Verify you've installed all required dependencies
+- For React projects, ensure you've installed the additional React ESLint plugins
+- Check that your package.json includes the `prepare` script
+
+### Manual Setup Checklist
+
+Ensure you have completed all these manual steps:
+
+- [ ] Created `eslint.config.mjs` with correct import
+- [ ] Created `prettier.config.mjs` with correct import
+- [ ] Created `lint-staged.config.mjs` with correct import
+- [ ] Added `prepare` script to package.json
+- [ ] Ran `npm run prepare` to initialize Husky
+- [ ] Created `.husky/pre-commit` file manually
+- [ ] Made `.husky/pre-commit` file executable
+
 ## License
 
-MIT © CodeIQLabs
+MIT - See [LICENSE](LICENSE) file for details.
+
+---
+
+**Part of the CodeIQLabs infrastructure ecosystem** - Standardized ESLint and Prettier
+configurations with automated pre-commit hooks for consistent code quality across all projects.
