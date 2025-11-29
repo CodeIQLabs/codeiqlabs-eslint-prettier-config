@@ -1,5 +1,12 @@
 # @codeiqlabs/eslint-prettier-config
 
+## 1.9.0
+
+### Minor Changes
+
+- f8ac06e: Add Nx-friendly React preset, bundle React plugins for smoother installs, improve plugin
+  resolution, and refresh README with copy/paste setup steps.
+
 ## 1.10.0
 
 ### Minor Changes
