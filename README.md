@@ -1,30 +1,31 @@
 # @codeiqlabs/eslint-prettier-config
 
-**Centralized ESLint, Prettier, and Pre-commit Hook Configurations for CodeIQLabs Projects**
+Shared ESLint v9 flat configs, Prettier defaults, and pre-commit templates for JS/TS (ESM & CJS).
+Dogfooded in this repo via `eslint.config.mjs`, `prettier.config.mjs`, and `lint-staged.config.mjs`.
 
-This package provides battle-tested, standardized code quality configurations that ensure consistent
-formatting, linting, and pre-commit validation across all CodeIQLabs repositories. Published as a
-dual module (ESM and CJS) with conditional exports for maximum compatibility.
+[![GitHub package version](https://img.shields.io/github/package-json/v/CodeIQLabs/codeiqlabs-eslint-prettier-config?label=version)](https://github.com/CodeIQLabs/codeiqlabs-eslint-prettier-config/packages)
+[![CI](https://github.com/CodeIQLabs/codeiqlabs-eslint-prettier-config/actions/workflows/ci.yml/badge.svg)](https://github.com/CodeIQLabs/codeiqlabs-eslint-prettier-config/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4+-blue.svg)](https://www.typescriptlang.org/)
+[![Node](https://img.shields.io/badge/Node-18.18+-green.svg)](https://nodejs.org/)
+[![ESLint](https://img.shields.io/badge/ESLint-9+-purple.svg)](https://eslint.org/)
 
-## What This Package Provides
+## What this package is (and isn’t)
 
-- **ESLint v9 Flat Configurations** - Modern linting rules for TypeScript, JavaScript, and React
-  projects
-- **Prettier Configuration** - Consistent code formatting with sensible defaults
-- **Pre-commit Hook Templates** - Automated quality checks using Husky and lint-staged
-- **Project-Specific Variants** - Tailored configurations for CDK, API, and React projects
-- **Dual Module Support** - Works with both ESM (.mjs) and CommonJS (.js) projects
+- **Is:** ESLint v9 flat presets (Minimal, Standard, React), shared Prettier options, and Husky + lint-staged pre-commit templates that drop into JS/TS projects.
+- **Is:** Built as dual ESM/CJS outputs with typed exports for broad toolchain support.
+- **Is:** A way to standardize style rules and pre-commit ergonomics across CodeIQLabs repos.
+- **Isn’t:** A kitchen-sink plugin pack—React rules are optional and only used when you opt in.
 
-## Key Benefits
+## Presets at a glance
 
-**Consistency Across Projects** - All CodeIQLabs repositories use identical code quality standards
-**Zero Configuration** - Import and use immediately with sensible defaults **Automated Quality
-Enforcement** - Pre-commit hooks prevent bad code from being committed **Battle-Tested** - This
-package uses its own configurations (dogfooding) to ensure reliability **Easy Updates** - Update
-linting rules across all projects by updating one package **Developer Experience** - Reduces setup
-time and eliminates configuration drift
+- **Minimal** — Base JS/TS rules, Prettier integration, shared ignores (`src/minimal.ts`, `src/ignores.ts`). Use for CLIs, libraries, or services without testing relaxations.
+- **Standard** — Minimal plus stricter TS/backend rules and test-file relaxations (`src/standard.ts`, `src/configs/testing.ts`, `src/configs/enhanced.ts`). Use for Node/TS apps with tests.
+- **React** — Minimal plus React + React Hooks rules (`src/react.ts`, `src/configs/react.ts`). React plugins are optional peer deps; use for React frontends.
+- **Prettier options** — Shared formatting defaults (`src/prettier-config.ts`).
+- **Pre-commit templates** — Husky + lint-staged presets (`src/pre-commit-config.ts`).
 
-## Dogfooding & Quality Assurance via Self-Validation
+## Quickstart
 
 This project demonstrates **authentic dogfooding** by using its own exported configurations
 throughout its codebase, proving the reliability and quality of the shared configuration.
@@ -332,57 +333,7 @@ We use Changesets with SemVer:
 Publishing targets GitHub Packages (`publishConfig.registry=https://npm.pkg.github.com`). Consumers
 pulling from GH Packages must configure their `.npmrc` accordingly.
 
-## Troubleshooting
+## Contributing & license
 
-### Common Setup Issues
-
-**1. Pre-commit hooks not running:**
-
-- Ensure you've run `npm run prepare` to initialize Husky
-- Verify `.husky/pre-commit` file exists and is executable
-- Check that `lint-staged.config.mjs` file exists in project root
-
-**2. ESLint configuration not found:**
-
-- Verify `eslint.config.mjs` file exists in project root
-- Check that the import statement matches the exact export name
-- Ensure the configuration file uses `.mjs` extension
-
-**3. Prettier not formatting files:**
-
-- Verify `prettier.config.mjs` file exists in project root
-- Check that your editor is configured to use the project's Prettier config
-- Run `npx prettier --check .` to verify configuration is working
-
-**4. lint-staged reports "No staged files match any configured task":**
-
-- Verify `lint-staged.config.mjs` file exists and exports the correct configuration
-- Check that you're staging files that match the configured patterns
-- Ensure the configuration import path is correct
-
-**5. Package not found errors:**
-
-- Verify you've installed all required dependencies
-- For React projects, ensure you've installed the additional React ESLint plugins
-- Check that your package.json includes the `prepare` script
-
-### Manual Setup Checklist
-
-Ensure you have completed all these manual steps:
-
-- [ ] Created `eslint.config.mjs` with correct import
-- [ ] Created `prettier.config.mjs` with correct import
-- [ ] Created `lint-staged.config.mjs` with correct import
-- [ ] Added `prepare` script to package.json
-- [ ] Ran `npm run prepare` to initialize Husky
-- [ ] Created `.husky/pre-commit` file manually
-- [ ] Made `.husky/pre-commit` file executable
-
-## License
-
-MIT - See [LICENSE](LICENSE) file for details.
-
----
-
-**Part of the CodeIQLabs infrastructure ecosystem** - Standardized ESLint and Prettier
-configurations with automated pre-commit hooks for consistent code quality across all projects.
+MIT licensed. See [LICENSE](LICENSE), [CONTRIBUTING.md](CONTRIBUTING.md), and [CHANGELOG.md](CHANGELOG.md).
+Releases are automated with Changesets; CI runs format/lint/tests via GitHub Actions.
