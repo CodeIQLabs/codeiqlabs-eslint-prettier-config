@@ -27,6 +27,11 @@
       "import": "./dist/esm/react.js",
       "require": "./dist/cjs/react.js"
     },
+    "./react-nx": {
+      "types": "./dist/react-nx.d.ts",
+      "import": "./dist/esm/react-nx.js",
+      "require": "./dist/cjs/react-nx.js"
+    },
     "./prettier": "./dist/cjs/prettier-config.js",
     "./ignores": {
       "types": "./dist/ignores.d.ts",
@@ -67,9 +72,10 @@
     "build:cjs:show": "tsc -p tsconfig.cjs.json --showConfig",
     "test:load": "node tests/load-config.test.cjs",
     "test:pre-commit": "node tests/pre-commit-config.test.cjs",
+    "test:react-nx": "node tests/react-nx-config.test.cjs",
     "test:esm": "node tests/esm-import-test.mjs",
-    "test:all": "npm run test:load && npm run test:pre-commit && npm run test:esm",
-    "prepublishOnly": "npm run build && npm run test:load && npm run test:pre-commit && npm run test:esm",
+    "test:all": "npm run test:load && npm run test:pre-commit && npm run test:react-nx && npm run test:esm",
+    "prepublishOnly": "npm run build && npm run test:load && npm run test:pre-commit && npm run test:react-nx && npm run test:esm",
     "release": "changeset publish"
   },
   "keywords": [
@@ -96,10 +102,14 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.0.0",
+    "@nx/eslint-plugin": "^22.0.0",
     "eslint-plugin-react": "^7.37.0",
     "eslint-plugin-react-hooks": "^5.0.0"
   },
   "peerDependenciesMeta": {
+    "@nx/eslint-plugin": {
+      "optional": true
+    },
     "eslint-plugin-react": {
       "optional": true
     },
@@ -109,7 +119,9 @@
   },
   "dependencies": {
     "@eslint/js": "^9.0.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-plugin-react": "^7.37.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "globals": "^15.0.0",
     "prettier": "^3.3.3",
     "husky": "^9.0.0",
@@ -120,7 +132,9 @@
     "@types/eslint": "^9.6.0",
     "@typescript-eslint/eslint-plugin": "^8.39.1",
     "@typescript-eslint/parser": "^8.39.1",
+    "@nx/eslint-plugin": "^22.0.3",
     "eslint": "^9.33.0",
+    "typescript-eslint": "^8.40.0",
     "rimraf": "^5.0.0",
     "typescript": "^5.4.0"
   }

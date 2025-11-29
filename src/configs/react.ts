@@ -5,23 +5,30 @@ import type { Linter } from 'eslint';
  * Requires optional peer dependencies: eslint-plugin-react and eslint-plugin-react-hooks
  */
 
-let react: any, reactHooks: any;
+import { createRequire } from 'module';
 
-try {
-  react = require('eslint-plugin-react');
-} catch {
-  throw new Error(
-    'Install eslint-plugin-react to use React configuration: npm install -D eslint-plugin-react',
-  );
-}
+const requireFromCwd = createRequire(process.cwd() + '/package.json');
 
-try {
-  reactHooks = require('eslint-plugin-react-hooks');
-} catch {
-  throw new Error(
-    'Install eslint-plugin-react-hooks to use React configuration: npm install -D eslint-plugin-react-hooks',
-  );
-}
+const loadPlugin = (name: string) => {
+  const attempts = [
+    () => requireFromCwd(name),
+    () => require(name),
+    () => require(require.resolve(name, { paths: [process.cwd()] })),
+  ];
+
+  for (const attempt of attempts) {
+    try {
+      return attempt();
+    } catch {
+      // try next resolution strategy
+    }
+  }
+
+  throw new Error(`Install ${name} to use React configuration: npm install -D ${name}`);
+};
+
+const react = loadPlugin('eslint-plugin-react');
+const reactHooks = loadPlugin('eslint-plugin-react-hooks');
 
 /**
  * React plugin configuration

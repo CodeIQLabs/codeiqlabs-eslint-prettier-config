@@ -1,4 +1,16 @@
-# @codeiqlabs/eslint-config
+# @codeiqlabs/eslint-prettier-config
+
+## 1.10.0
+
+### Minor Changes
+
+- Add Nx-friendly React preset (react-nx) layering Nx flat configs and module-boundary enforcement.
+- Bundle React/React Hooks plugins as deps and make plugin resolution resilient to workspace layout.
+
+### Patch Changes
+
+- Rewrite README with copy/paste setup steps per project type; remove redundant sections and
+  simplify Husky hook examples.
 
 ## 1.8.1
 
