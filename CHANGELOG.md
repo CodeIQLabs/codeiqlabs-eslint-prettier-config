@@ -9,8 +9,8 @@
 
 ### Patch Changes
 
-- Rewrite README with copy/paste setup steps per project type; remove redundant sections and simplify
-  Husky hook examples.
+- Rewrite README with copy/paste setup steps per project type; remove redundant sections and
+  simplify Husky hook examples.
 
 ## 1.8.1
 

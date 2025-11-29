@@ -84,26 +84,35 @@ When you see a new version of this package, you can be confident that:
 
 ### Minimal (CDK, Infrastructure, Utilities)
 
-1) Install deps:
+1. Install deps:
+
 ```bash
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier
 ```
-2) Create `eslint.config.mjs`:
+
+2. Create `eslint.config.mjs`:
+
 ```javascript
 import minimal from '@codeiqlabs/eslint-prettier-config/minimal';
 export default minimal;
 ```
-3) Create `prettier.config.mjs`:
+
+3. Create `prettier.config.mjs`:
+
 ```javascript
 import config from '@codeiqlabs/eslint-prettier-config/prettier';
 export default config;
 ```
-4) Create `lint-staged.config.mjs`:
+
+4. Create `lint-staged.config.mjs`:
+
 ```javascript
 import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
 export default lintStagedMinimalConfig;
 ```
-5) Add scripts to `package.json`:
+
+5. Add scripts to `package.json`:
+
 ```json
 {
   "scripts": {
@@ -115,7 +124,9 @@ export default lintStagedMinimalConfig;
   }
 }
 ```
-6) Init Husky hook:
+
+6. Init Husky hook:
+
 ```bash
 npx husky init
 echo "npx lint-staged" > .husky/pre-commit
@@ -124,26 +135,35 @@ chmod +x .husky/pre-commit
 
 ### Standard (API, Backend Projects)
 
-1) Install deps:
+1. Install deps:
+
 ```bash
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier
 ```
-2) `eslint.config.mjs`:
+
+2. `eslint.config.mjs`:
+
 ```javascript
 import standard from '@codeiqlabs/eslint-prettier-config/standard';
 export default standard;
 ```
-3) `prettier.config.mjs`:
+
+3. `prettier.config.mjs`:
+
 ```javascript
 import config from '@codeiqlabs/eslint-prettier-config/prettier';
 export default config;
 ```
-4) `lint-staged.config.mjs`:
+
+4. `lint-staged.config.mjs`:
+
 ```javascript
 import { lintStagedConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
 export default lintStagedConfig;
 ```
-5) Add scripts to `package.json`:
+
+5. Add scripts to `package.json`:
+
 ```json
 {
   "scripts": {
@@ -155,7 +175,9 @@ export default lintStagedConfig;
   }
 }
 ```
-6) Init Husky hook:
+
+6. Init Husky hook:
+
 ```bash
 npx husky init
 echo "npx lint-staged" > .husky/pre-commit
@@ -164,26 +186,35 @@ chmod +x .husky/pre-commit
 
 ### React (UI Projects)
 
-1) Install deps:
+1. Install deps:
+
 ```bash
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-plugin-react eslint-plugin-react-hooks
 ```
-2) `eslint.config.mjs`:
+
+2. `eslint.config.mjs`:
+
 ```javascript
 import react from '@codeiqlabs/eslint-prettier-config/react';
 export default react;
 ```
-3) `prettier.config.mjs`:
+
+3. `prettier.config.mjs`:
+
 ```javascript
 import config from '@codeiqlabs/eslint-prettier-config/prettier';
 export default config;
 ```
-4) `lint-staged.config.mjs`:
+
+4. `lint-staged.config.mjs`:
+
 ```javascript
 import { lintStagedReactConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
 export default lintStagedReactConfig;
 ```
-5) Add scripts to `package.json`:
+
+5. Add scripts to `package.json`:
+
 ```json
 {
   "scripts": {
@@ -195,7 +226,9 @@ export default lintStagedReactConfig;
   }
 }
 ```
-6) Init Husky hook:
+
+6. Init Husky hook:
+
 ```bash
 npx husky init
 echo "npx lint-staged" > .husky/pre-commit
@@ -204,26 +237,35 @@ chmod +x .husky/pre-commit
 
 ### Nx React (Nx Monorepos)
 
-1) Install deps:
+1. Install deps:
+
 ```bash
 npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-plugin-react eslint-plugin-react-hooks @nx/eslint-plugin
 ```
-2) `eslint.config.mjs`:
+
+2. `eslint.config.mjs`:
+
 ```javascript
 import reactNx from '@codeiqlabs/eslint-prettier-config/react-nx';
 export default reactNx;
 ```
-3) `prettier.config.mjs`:
+
+3. `prettier.config.mjs`:
+
 ```javascript
 import config from '@codeiqlabs/eslint-prettier-config/prettier';
 export default config;
 ```
-4) `lint-staged.config.mjs`:
+
+4. `lint-staged.config.mjs`:
+
 ```javascript
 import { lintStagedReactConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
 export default lintStagedReactConfig;
 ```
-5) Add scripts to `package.json`:
+
+5. Add scripts to `package.json`:
+
 ```json
 {
   "scripts": {
@@ -235,7 +277,9 @@ export default lintStagedReactConfig;
   }
 }
 ```
-6) Init Husky hook:
+
+6. Init Husky hook:
+
 ```bash
 npx husky init
 echo "npx lint-staged" > .husky/pre-commit

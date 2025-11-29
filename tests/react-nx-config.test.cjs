@@ -11,7 +11,8 @@ try {
 }
 
 if (hasNx) {
-  const reactNx = require(path.join(__dirname, '..', 'dist', 'cjs', 'react-nx.js'));
+  const reactNxMod = require(path.join(__dirname, '..', 'dist', 'cjs', 'react-nx.js'));
+  const reactNx = reactNxMod.default || reactNxMod;
   assert.ok(Array.isArray(reactNx) && reactNx.length > 0, 'react-nx FlatConfig[]');
   console.log('? Nx React config smoke test passed');
 }

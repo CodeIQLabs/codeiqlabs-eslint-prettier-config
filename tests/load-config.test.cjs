@@ -17,7 +17,8 @@ try {
   // React plugin not available, skip React tests
 }
 if (hasReact) {
-  const reactCfg = require(path.join(__dirname, '..', 'dist', 'cjs', 'react.js'));
+  const reactMod = require(path.join(__dirname, '..', 'dist', 'cjs', 'react.js'));
+  const reactCfg = reactMod.default || reactMod;
   assert.ok(Array.isArray(reactCfg) && reactCfg.length > 0, 'react FlatConfig[]');
 }
 
