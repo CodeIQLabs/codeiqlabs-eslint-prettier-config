@@ -44,36 +44,6 @@ This continuous validation ensures that:
 - The configuration scales properly to TypeScript projects with multiple file types
 - Other CodeIQLabs projects can confidently adopt these standards
 
-### ESLint Configuration Dogfooding
-
-This repository uses its own exported ESLint configuration:
-
-```javascript
-// eslint.config.mjs - This project uses its own ESLint configuration
-import minimal from '@codeiqlabs/eslint-prettier-config/minimal';
-export default minimal;
-```
-
-### Prettier Configuration Dogfooding
-
-This repository uses its own exported Prettier configuration:
-
-```javascript
-// prettier.config.mjs - This project uses its own Prettier configuration
-import config from '@codeiqlabs/eslint-prettier-config/prettier';
-export default config;
-```
-
-### Pre-commit Hooks Configuration Dogfooding
-
-This repository uses its own exported pre-commit hook configuration:
-
-```javascript
-// lint-staged.config.mjs - This project uses its own pre-commit configuration
-import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
-export default lintStagedMinimalConfig;
-```
-
 ### No .prettierignore File
 
 **Intentionally, this package has no `.prettierignore` file.** This demonstrates that:
@@ -110,195 +80,34 @@ When you see a new version of this package, you can be confident that:
 - The pre-commit hooks work reliably in a real git repository
 - All configurations are compatible with the latest versions of their dependencies
 
-## Installation
-
-### Quick Start
-
-**For CDK/Infrastructure/Utilities projects:**
-
-```bash
-npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript prettier
-```
-
-**For API/Backend Projects:**
-
-```bash
-npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript prettier
-```
-
-**For React/UI projects:**
-
-```bash
-npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin typescript prettier eslint-plugin-react eslint-plugin-react-hooks
-```
-
-### Pre-commit Hooks Setup (ESSENTIAL FOR CODE QUALITY)
-
-**IMPORTANT**: Pre-commit hooks are essential for this library's value proposition. Follow these
-steps carefully:
-
-**1. Install Husky and lint-staged:**
-
-```bash
-npm install --save-dev husky lint-staged
-```
-
-**2. Add prepare script to package.json (REQUIRED):**
-
-```bash
-npm pkg set scripts.prepare="husky"
-```
-
-**3. Initialize Husky (REQUIRED MANUAL STEP):**
-
-```bash
-npm run prepare
-```
-
-**4. Create pre-commit hook manually:**
-
-```bash
-echo "npx lint-staged" > .husky/pre-commit
-chmod +x .husky/pre-commit
-```
-
-**Note**: The `npx husky add` command is deprecated. Use the manual approach above.
-
-### Required Manual Configuration Files
-
-You must create these configuration files in your project root:
-
-**1. ESLint Configuration (`eslint.config.mjs`):**
-
-```javascript
-import { eslintConfigMinimal } from '@codeiqlabs/eslint-prettier-config';
-
-export default eslintConfigMinimal;
-```
-
-**2. Prettier Configuration (`prettier.config.mjs`):**
-
-```javascript
-import { prettierConfig } from '@codeiqlabs/eslint-prettier-config';
-
-export default prettierConfig;
-```
-
-**3. lint-staged Configuration (`lint-staged.config.mjs`):**
-
-```javascript
-import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
-
-export default lintStagedMinimalConfig;
-```
-
-**4. Package.json Scripts (add to your existing scripts):**
-
-```json
-{
-  "scripts": {
-    "prepare": "husky",
-    "lint": "npx eslint .",
-    "lint:fix": "npx eslint . --fix",
-    "format": "npx prettier --write .",
-    "format:check": "npx prettier --check ."
-  }
-}
-```
-
-### Project Structure After Setup
-
-After installation and configuration, your project should have this structure:
-
-```
-your-codeiqlabs-project/
-├── package.json                 # Scripts and dependencies (with prepare script)
-├── eslint.config.mjs            # ESLint configuration (REQUIRED)
-├── prettier.config.mjs          # Prettier configuration (REQUIRED)
-├── lint-staged.config.mjs       # Pre-commit hooks configuration (REQUIRED)
-├── .husky/                      # Git hooks directory (created by npm run prepare)
-│   └── pre-commit               # Pre-commit hook (created manually)
-├── src/                         # Your source code
-│   └── index.ts
-└── dist/                        # Build output (ignored by linting)
-```
-
-### What's Included vs. What You Install
-
-**Automatically included** (bundled dependencies):
-
-- `eslint-config-prettier` - Disables conflicting ESLint formatting rules
-- `globals` - Global variable definitions for different environments
-- `husky` - Git hooks for pre-commit automation (when using pre-commit setup)
-- `lint-staged` - Run linters on staged files (when using pre-commit setup)
-
-**You must install** (peer dependencies):
-
-- `eslint` ^9.0.0 - The ESLint linter itself
-- `@typescript-eslint/parser` ^8.0.0 - TypeScript parser for ESLint
-- `@typescript-eslint/eslint-plugin` ^8.0.0 - TypeScript-specific linting rules
-- `prettier` ^3.3.3 - Code formatter (for running format commands)
-
-**Optional for React projects**:
-
-- `eslint-plugin-react` ^7.37.0 - React-specific linting rules
-- `eslint-plugin-react-hooks` ^5.0.0 - React Hooks linting rules
-
-## Usage by Project Type
+## Usage by Project Type (copy/paste setups)
 
 ### Minimal (CDK, Infrastructure, Utilities)
 
-**ESLint configuration (`eslint.config.mjs`):**
-
+1) Install deps:
+```bash
+npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier
+```
+2) Create `eslint.config.mjs`:
 ```javascript
 import minimal from '@codeiqlabs/eslint-prettier-config/minimal';
 export default minimal;
 ```
-
-**Use for**: CDK projects, infrastructure utilities, simple TypeScript libraries **Includes**: Base
-JavaScript/TypeScript rules, Prettier integration **Dependencies**: No React dependencies
-
-### Standard (API, Backend Projects)
-
-**ESLint configuration (`eslint.config.mjs`):**
-
-```javascript
-import standard from '@codeiqlabs/eslint-prettier-config/standard';
-export default standard;
-```
-
-**Use for**: API servers, backend services, comprehensive TypeScript projects **Includes**: All
-minimal rules plus testing utilities and enhanced linting **Dependencies**: No React dependencies
-
-### React (UI Projects)
-
-**ESLint configuration (`eslint.config.mjs`):**
-
-```javascript
-import react from '@codeiqlabs/eslint-prettier-config/react';
-export default react;
-```
-
-**Use for**: React applications, UI components, frontend projects **Includes**: All minimal rules
-plus React-specific linting **Dependencies**: Requires `eslint-plugin-react` and
-`eslint-plugin-react-hooks`
-
-## Common Configuration
-
-### Prettier Configuration (All Project Types)
-
-**Prettier configuration (`prettier.config.mjs`):**
-
+3) Create `prettier.config.mjs`:
 ```javascript
 import config from '@codeiqlabs/eslint-prettier-config/prettier';
 export default config;
 ```
-
-### Package.json Scripts (All Project Types)
-
+4) Create `lint-staged.config.mjs`:
+```javascript
+import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
+export default lintStagedMinimalConfig;
+```
+5) Add scripts to `package.json`:
 ```json
 {
   "scripts": {
+    "prepare": "husky",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "format": "npx prettier . --write",
@@ -306,6 +115,134 @@ export default config;
   }
 }
 ```
+6) Init Husky hook:
+```bash
+npx husky init
+echo "npx lint-staged" > .husky/pre-commit
+chmod +x .husky/pre-commit
+```
+
+### Standard (API, Backend Projects)
+
+1) Install deps:
+```bash
+npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier
+```
+2) `eslint.config.mjs`:
+```javascript
+import standard from '@codeiqlabs/eslint-prettier-config/standard';
+export default standard;
+```
+3) `prettier.config.mjs`:
+```javascript
+import config from '@codeiqlabs/eslint-prettier-config/prettier';
+export default config;
+```
+4) `lint-staged.config.mjs`:
+```javascript
+import { lintStagedConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
+export default lintStagedConfig;
+```
+5) Add scripts to `package.json`:
+```json
+{
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "format": "npx prettier . --write",
+    "format:check": "npx prettier . --check"
+  }
+}
+```
+6) Init Husky hook:
+```bash
+npx husky init
+echo "npx lint-staged" > .husky/pre-commit
+chmod +x .husky/pre-commit
+```
+
+### React (UI Projects)
+
+1) Install deps:
+```bash
+npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-plugin-react eslint-plugin-react-hooks
+```
+2) `eslint.config.mjs`:
+```javascript
+import react from '@codeiqlabs/eslint-prettier-config/react';
+export default react;
+```
+3) `prettier.config.mjs`:
+```javascript
+import config from '@codeiqlabs/eslint-prettier-config/prettier';
+export default config;
+```
+4) `lint-staged.config.mjs`:
+```javascript
+import { lintStagedReactConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
+export default lintStagedReactConfig;
+```
+5) Add scripts to `package.json`:
+```json
+{
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "format": "npx prettier . --write",
+    "format:check": "npx prettier . --check"
+  }
+}
+```
+6) Init Husky hook:
+```bash
+npx husky init
+echo "npx lint-staged" > .husky/pre-commit
+chmod +x .husky/pre-commit
+```
+
+### Nx React (Nx Monorepos)
+
+1) Install deps:
+```bash
+npm i -D @codeiqlabs/eslint-prettier-config eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin prettier eslint-plugin-react eslint-plugin-react-hooks @nx/eslint-plugin
+```
+2) `eslint.config.mjs`:
+```javascript
+import reactNx from '@codeiqlabs/eslint-prettier-config/react-nx';
+export default reactNx;
+```
+3) `prettier.config.mjs`:
+```javascript
+import config from '@codeiqlabs/eslint-prettier-config/prettier';
+export default config;
+```
+4) `lint-staged.config.mjs`:
+```javascript
+import { lintStagedReactConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
+export default lintStagedReactConfig;
+```
+5) Add scripts to `package.json`:
+```json
+{
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "format": "npx prettier . --write",
+    "format:check": "npx prettier . --check"
+  }
+}
+```
+6) Init Husky hook:
+```bash
+npx husky init
+echo "npx lint-staged" > .husky/pre-commit
+chmod +x .husky/pre-commit
+```
+
+That's it—drop in the files, install deps, and `npx lint-staged` will run via Husky on commits.
 
 ### Legacy CommonJS Support
 
@@ -322,43 +259,6 @@ module.exports = require('@codeiqlabs/eslint-prettier-config/prettier');
 **Tip:** Prefer `npx eslint .` instead of passing globs; our preset already ships a global ignores
 block for `dist`, `build`, `.next`, `coverage`, etc.
 
-## Pre-commit Hooks Configuration
-
-After completing the pre-commit hooks setup from the Installation section, configure lint-staged for
-your project type:
-
-### Configuration by Project Type
-
-**CDK/Infrastructure projects:**
-
-```javascript
-// lint-staged.config.mjs
-import { lintStagedMinimalConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
-export default lintStagedMinimalConfig;
-```
-
-**API projects:**
-
-```javascript
-// lint-staged.config.mjs
-import { lintStagedConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
-export default lintStagedConfig;
-```
-
-**React/UI projects:**
-
-```javascript
-// lint-staged.config.mjs
-import { lintStagedReactConfig } from '@codeiqlabs/eslint-prettier-config/pre-commit';
-export default lintStagedReactConfig;
-```
-
-### Available Configurations
-
-- **`lintStagedMinimalConfig`** - For CDK/infrastructure projects (TypeScript, JSON, YAML)
-- **`lintStagedConfig`** - For API projects (includes Markdown and additional file types)
-- **`lintStagedReactConfig`** - For React/UI projects (includes CSS, HTML, and all UI file types)
-
 ## What's exported (dual ESM + CJS)
 
 | Subpath                                         | ESM import                                             | CJS require                                                 |
@@ -366,6 +266,7 @@ export default lintStagedReactConfig;
 | `@codeiqlabs/eslint-prettier-config`            | `import cfg from '@codeiqlabs/eslint-prettier-config'` | `const cfg = require('@codeiqlabs/eslint-prettier-config')` |
 | `@codeiqlabs/eslint-prettier-config/minimal`    | `import minimal from '@.../minimal'`                   | `const minimal = require('@.../minimal')`                   |
 | `@codeiqlabs/eslint-prettier-config/react`      | `import react from '@.../react'`                       | `const react = require('@.../react')`                       |
+| `@codeiqlabs/eslint-prettier-config/react-nx`   | `import reactNx from '@.../react-nx'`                  | `const reactNx = require('@.../react-nx')`                  |
 | `@codeiqlabs/eslint-prettier-config/prettier`   | `import p from '@.../prettier'`                        | `const p = require('@.../prettier')`                        |
 | `@codeiqlabs/eslint-prettier-config/ignores`    | `import {…} from '@.../ignores'`                       | `const {…} = require('@.../ignores')`                       |
 | `@codeiqlabs/eslint-prettier-config/pre-commit` | `import {…} from '@.../pre-commit'`                    | `const {…} = require('@.../pre-commit')`                    |
