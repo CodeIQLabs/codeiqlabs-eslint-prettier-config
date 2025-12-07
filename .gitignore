@@ -66,4 +66,5 @@ cdk.out/
 cdk.context.json
 template.yaml
 *.tsbuildinfo
-dist/
+dist
+*.iml
