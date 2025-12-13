@@ -55,6 +55,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
+    "prepare": "npm run build",
     "postinstall": "node -e \"try { require('child_process').execSync('husky', {stdio: 'inherit'}) } catch (e) { console.log('Husky setup skipped') }\"",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
