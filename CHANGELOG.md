@@ -1,5 +1,11 @@
 # @codeiqlabs/eslint-prettier-config
 
+## 1.11.1
+
+### Patch Changes
+
+- 961e743: Clean release for registry consumption
+
 ## 1.11.0
 
 ### Minor Changes
