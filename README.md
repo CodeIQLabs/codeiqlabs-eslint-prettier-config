@@ -12,16 +12,21 @@ Dogfooded in this repo via `eslint.config.mjs`, `prettier.config.mjs`, and `lint
 
 ## What this package is (and isn’t)
 
-- **Is:** ESLint v9 flat presets (Minimal, Standard, React), shared Prettier options, and Husky + lint-staged pre-commit templates that drop into JS/TS projects.
+- **Is:** ESLint v9 flat presets (Minimal, Standard, React), shared Prettier options, and Husky +
+  lint-staged pre-commit templates that drop into JS/TS projects.
 - **Is:** Built as dual ESM/CJS outputs with typed exports for broad toolchain support.
 - **Is:** A way to standardize style rules and pre-commit ergonomics across CodeIQLabs repos.
 - **Isn’t:** A kitchen-sink plugin pack—React rules are optional and only used when you opt in.
 
 ## Presets at a glance
 
-- **Minimal** — Base JS/TS rules, Prettier integration, shared ignores (`src/minimal.ts`, `src/ignores.ts`). Use for CLIs, libraries, or services without testing relaxations.
-- **Standard** — Minimal plus stricter TS/backend rules and test-file relaxations (`src/standard.ts`, `src/configs/testing.ts`, `src/configs/enhanced.ts`). Use for Node/TS apps with tests.
-- **React** — Minimal plus React + React Hooks rules (`src/react.ts`, `src/configs/react.ts`). React plugins are optional peer deps; use for React frontends.
+- **Minimal** — Base JS/TS rules, Prettier integration, shared ignores (`src/minimal.ts`,
+  `src/ignores.ts`). Use for CLIs, libraries, or services without testing relaxations.
+- **Standard** — Minimal plus stricter TS/backend rules and test-file relaxations
+  (`src/standard.ts`, `src/configs/testing.ts`, `src/configs/enhanced.ts`). Use for Node/TS apps
+  with tests.
+- **React** — Minimal plus React + React Hooks rules (`src/react.ts`, `src/configs/react.ts`). React
+  plugins are optional peer deps; use for React frontends.
 - **Prettier options** — Shared formatting defaults (`src/prettier-config.ts`).
 - **Pre-commit templates** — Husky + lint-staged presets (`src/pre-commit-config.ts`).
 
@@ -335,5 +340,6 @@ pulling from GH Packages must configure their `.npmrc` accordingly.
 
 ## Contributing & license
 
-MIT licensed. See [LICENSE](LICENSE), [CONTRIBUTING.md](CONTRIBUTING.md), and [CHANGELOG.md](CHANGELOG.md).
-Releases are automated with Changesets; CI runs format/lint/tests via GitHub Actions.
+MIT licensed. See [LICENSE](LICENSE), [CONTRIBUTING.md](CONTRIBUTING.md), and
+[CHANGELOG.md](CHANGELOG.md). Releases are automated with Changesets; CI runs format/lint/tests via
+GitHub Actions.
