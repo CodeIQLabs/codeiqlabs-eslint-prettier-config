@@ -1,5 +1,11 @@
 # @codeiqlabs/eslint-prettier-config
 
+## 1.11.2
+
+### Patch Changes
+
+- bf335be: Update documentation formatting and sync lockfile version
+
 ## 1.11.1
 
 ### Patch Changes
