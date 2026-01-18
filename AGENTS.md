@@ -5,6 +5,7 @@ trigger: always_on
 ## Purpose
 
 Shared ESLint and Prettier configuration package for all CodeIQLabs repositories. Provides:
+
 - **ESLint v9 flat configs** - Minimal, Standard, React, and React-Nx presets
 - **Prettier configuration** - Shared formatting defaults
 - **Pre-commit hooks** - Husky + lint-staged templates
@@ -102,11 +103,13 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 ## Dependencies
 
 **Peer Dependencies** (required):
+
 - `eslint` ^9.0.0
 - `@typescript-eslint/parser` ^8.0.0
 - `@typescript-eslint/eslint-plugin` ^8.0.0
 
 **Optional Peer Dependencies** (for React/Nx presets):
+
 - `eslint-plugin-react` ^7.37.0
 - `eslint-plugin-react-hooks` ^5.0.0
 - `@nx/eslint-plugin` ^22.0.0
@@ -124,26 +127,31 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 ## Architecture Decisions
 
 ### Dual ESM/CJS Builds
+
 - **Why**: Support both modern ESM projects and legacy CJS projects
 - **How**: Separate TypeScript builds with different module targets
 - **Trade-off**: More complex build process, but broader compatibility
 
 ### Flat Config (ESLint v9)
+
 - **Why**: ESLint v9 requires flat config format
 - **How**: Export arrays of config objects instead of legacy `.eslintrc` format
 - **Trade-off**: Breaking change from older ESLint versions, but future-proof
 
 ### Optional React Dependencies
+
 - **Why**: Don't force React plugins on non-React projects
 - **How**: React preset is a separate subpath export with optional peer deps
 - **Trade-off**: Consumers must install React plugins separately
 
 ### Minimal as Default
+
 - **Why**: Most CodeIQLabs repos are infrastructure/CDK projects
 - **How**: Root export (`@codeiqlabs/eslint-prettier-config`) is minimal preset
 - **Trade-off**: React projects must explicitly import `/react` subpath
 
 ### Dogfooding
+
 - **Why**: Ensure configs work in real-world usage before publishing
 - **How**: This repo uses its own exported configs for linting/formatting
 - **Trade-off**: Can't publish broken configs (which is a good thing!)
@@ -160,6 +168,7 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 ## Key Files
 
 ### Source Code (`/src`)
+
 - **`index.ts`** - Root export (re-exports minimal preset)
 - **`minimal.ts`** - Base + TypeScript + Prettier (for CDK/infrastructure)
 - **`standard.ts`** - Minimal + testing + enhanced rules (for APIs/backend)
@@ -170,6 +179,7 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 - **`ignores.ts`** - Common ignore patterns (dist, build, .next, etc.)
 
 ### Config Building Blocks (`/src/configs`)
+
 - **`base.ts`** - JavaScript/ES2024 defaults
 - **`typescript.ts`** - TypeScript parser and rules
 - **`prettier.ts`** - ESLint/Prettier compatibility
@@ -178,17 +188,20 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 - **`react.ts`** - React and React Hooks plugin configs
 
 ### Tests (`/tests`)
+
 - **`load-config.test.cjs`** - Smoke test for CJS imports
 - **`pre-commit-config.test.cjs`** - Validates pre-commit exports
 - **`react-nx-config.test.cjs`** - Tests React-Nx preset
 - **`esm-import-test.mjs`** - Validates ESM imports
 
 ### Build Configuration
+
 - **`tsconfig.esm.json`** - ESM build target
 - **`tsconfig.cjs.json`** - CJS build target
 - **`package.json`** - Dual exports, scripts, dependencies
 
 ### CI/CD
+
 - **`.github/workflows/ci.yml`** - PR checks (lint, format, build, test)
 - **`.github/workflows/release.yml`** - Automated publishing via changesets
 
