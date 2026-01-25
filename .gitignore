@@ -68,3 +68,6 @@ template.yaml
 *.tsbuildinfo
 dist
 *.iml
+
+# Local pnpm overrides for development
+.pnpmfile.cjs

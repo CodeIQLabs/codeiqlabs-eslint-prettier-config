@@ -1,0 +1,21 @@
+/**
+ * Local pnpm overrides for development
+ *
+ * Copy this file to .pnpmfile.cjs (which is gitignored) to use local packages
+ * instead of published versions during development.
+ *
+ * Usage:
+ *   cp .pnpmfile.cjs.example .pnpmfile.cjs
+ *   pnpm install
+ */
+module.exports = {
+  hooks: {
+    readPackage(pkg) {
+      // Example: Override a dependency with a local version
+      // if (pkg.dependencies?.['@codeiqlabs/some-package']) {
+      //   pkg.dependencies['@codeiqlabs/some-package'] = 'file:../codeiqlabs-some-package';
+      // }
+      return pkg;
+    }
+  }
+};
