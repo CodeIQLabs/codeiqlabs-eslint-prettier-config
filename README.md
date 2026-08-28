@@ -1,3 +1,8 @@
+---
+inclusion: fileMatch
+fileMatchPattern: 'src/**/*'
+---
+
 # @codeiqlabs/eslint-prettier-config
 
 Shared ESLint v9 flat configs, Prettier defaults, and pre-commit templates for JS/TS (ESM & CJS).
@@ -329,7 +334,7 @@ repos.
 
 ## Versioning & Releases
 
-We use Changesets with SemVer:
+We use SemVer:
 
 - **patch**: fixes/docs/build tweaks
 - **minor**: new preset(s) or additive config
@@ -338,8 +343,7 @@ We use Changesets with SemVer:
 Publishing targets GitHub Packages (`publishConfig.registry=https://npm.pkg.github.com`). Consumers
 pulling from GH Packages must configure their `.npmrc` accordingly.
 
-## Contributing & license
+## License
 
-MIT licensed. See [LICENSE](LICENSE), [CONTRIBUTING.md](CONTRIBUTING.md), and
-[CHANGELOG.md](CHANGELOG.md). Releases are automated with Changesets; CI runs format/lint/tests via
-GitHub Actions.
+MIT licensed. See [LICENSE](LICENSE) and [CHANGELOG.md](CHANGELOG.md). Releases are automated via CI
+on version bump; CI runs format/lint/tests via GitHub Actions.

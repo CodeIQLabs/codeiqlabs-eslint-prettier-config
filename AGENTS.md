@@ -1,5 +1,5 @@
 ---
-trigger: always_on
+inclusion: always
 ---
 
 ## Purpose
@@ -74,18 +74,20 @@ pnpm run lint
 pnpm run format:check
 ```
 
-### Publishing
+### Publishing (Automated via CI)
 
-```bash
-# Create a changeset
-pnpm changeset
+Releases are version-based. When you push to `main` with a new version in `package.json`, CI will:
 
-# Version packages (updates CHANGELOG.md and package.json)
-pnpm changeset:version
+- Create a Git tag
+- Create a GitHub Release with auto-generated notes
+- Publish to GitHub Packages
 
-# Build and publish (automated via CI)
-pnpm run release
-```
+**To release a new version:**
+
+1. Bump the version in `package.json` (follow semver)
+2. Update `CHANGELOG.md` with release notes
+3. Commit and push to `main`
+4. CI handles the rest automatically
 
 ### Consuming in Other Repos
 
@@ -117,7 +119,6 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 ## Gotchas
 
 - **Always bump version before publishing** - Consumers won't get updates without a version change
-- **Use changesets for versioning** - Don't manually edit version numbers
 - **Build before testing** - Tests run against compiled `dist/` output, not source
 - **React plugins are optional** - Only needed when using React or React-Nx presets
 - **Dual builds required** - Must build both ESM and CJS for compatibility
@@ -160,7 +161,6 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 
 ❌ **Don't add repo-specific rules here** - Use local overrides in consuming repos instead  
 ❌ **Don't publish without running tests** - `prepublishOnly` script prevents this  
-❌ **Don't manually edit version numbers** - Use changesets workflow  
 ❌ **Don't skip the build step** - Tests and publishing require compiled output  
 ❌ **Don't commit dist/ to git** - Build artifacts are generated, not source  
 ❌ **Don't reference FILE-REFERENCE.md** - This file was removed; use README.md instead
@@ -203,7 +203,7 @@ echo "import config from '@codeiqlabs/eslint-prettier-config/prettier';\nexport 
 ### CI/CD
 
 - **`.github/workflows/ci.yml`** - PR checks (lint, format, build, test)
-- **`.github/workflows/release.yml`** - Automated publishing via changesets
+- **`.github/workflows/release.yml`** - Automated publishing on version bump
 
 ## Source of Truth
 
